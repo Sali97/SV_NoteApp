@@ -13,13 +13,21 @@
 
     <UserControl.ContextMenu>
         <ContextMenu>
-            <MenuItem  Header="Módosítás" Command="{Binding Path=UpdateCatCommand}"/>
-            <MenuItem  Header="Törlés" Command="{Binding Path=DeleteCatCommand}"/>
+            <MenuItem  Header="Módosítás" Command="{Binding Path=UpdateCatCommand}">
+                <MenuItem.Icon>
+                    <Image Stretch="UniformToFill" Source="{StaticResource editIcon}"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem  Header="Törlés" Command="{Binding Path=DeleteCatCommand}">
+                <MenuItem.Icon>
+                    <Image Stretch="UniformToFill" Source="{StaticResource deleteIcon}"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
     </UserControl.ContextMenu>
 
     <Grid Margin="5,2,5,2">
-        <Border Background="GhostWhite" CornerRadius="5" BorderBrush="Black" BorderThickness="1"/>
+        <Border Background="#F8FAFC" CornerRadius="5" BorderBrush="Black" BorderThickness="1"/>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"  Text="{Binding Path=MyNoteCategory.Name}" Margin="5,5,5,5"/>
     </Grid>
 </UserControl>

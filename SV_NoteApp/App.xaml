@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:SV_NoteApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <BitmapImage x:Key="deleteIcon" UriSource="/res/Image/deleteIcon.png"></BitmapImage>
+        <BitmapImage x:Key="editIcon" UriSource="res/Image/editIcon.png"></BitmapImage>
+        <BitmapImage x:Key="newIcon" UriSource="res/Image/newIcon.png"></BitmapImage>
+        <BitmapImage x:Key="backIcon" UriSource="res/Image/backIcon.png"></BitmapImage>
+
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

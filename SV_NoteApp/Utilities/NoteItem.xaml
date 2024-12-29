@@ -12,22 +12,29 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="18*"/>
             <RowDefinition Height="43*"/>
         </Grid.RowDefinitions>
-        <Separator Grid.Row="0" VerticalAlignment="Bottom" Width="3"/>
 
-        <Border Background="AliceBlue" CornerRadius="20" Grid.RowSpan="3" BorderBrush="Black" BorderThickness="1"/>
+        <Border  Background="#9AA6B2" CornerRadius="10" Grid.RowSpan="3" BorderBrush="Black" BorderThickness="1"/>
 
-        <TextBlock Margin="10,0,0,0" FontSize="32" Grid.Row="0" Text="{Binding MyNote.Title}"/>
+        <TextBlock Margin="10,4,10,0" FontSize="32" Grid.Row="0" Text="{Binding MyNote.Title}"/>
         <TextBlock Margin="10,10,10,10" FontSize="16" Grid.Row="1" TextWrapping="Wrap" Text="{Binding MyNote.Text}"/>
 
    </Grid>
     
     <UserControl.ContextMenu>
         <ContextMenu>
-            <MenuItem  Header="Módosítás" Command="{Binding Path=EditNoteCommand}"/>
-            <MenuItem  Header="Törlés" Command="{Binding Path=DeleteNoteCommand}"/>
+            <MenuItem Header="Módosítás" Command="{Binding Path=EditNoteCommand}">
+                <MenuItem.Icon>
+                    <Image Stretch="UniformToFill" Source="{StaticResource editIcon}"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem  Header="Törlés" Command="{Binding Path=DeleteNoteCommand}">
+                <MenuItem.Icon>
+                    <Image Stretch="UniformToFill" Source="{StaticResource deleteIcon}"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
     </UserControl.ContextMenu>
 </UserControl>   

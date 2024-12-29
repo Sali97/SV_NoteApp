@@ -9,23 +9,20 @@
              xmlns:vw="clr-namespace:SV_NoteApp.Utilities">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="580*"/>
+            <ColumnDefinition Width="140" MinWidth="140"/>
+            <ColumnDefinition Width="550*" MinWidth="550"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="11*"/>
-            <RowDefinition Height="117*"/>
+            <RowDefinition Height="10*" MinHeight="10"/>
+            <RowDefinition Height="115*" MinHeight="115"/>
         </Grid.RowDefinitions>
 
 
-        
-        <GridSplitter Grid.RowSpan="3" HorizontalAlignment="Right" Background="red"/>
-
-        <Border Background="Blue" Grid.RowSpan="3" Grid.ColumnSpan="2"></Border>
+        <Border Background="#BCCCDC" Grid.RowSpan="3" Grid.ColumnSpan="2"></Border>
         <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding FilterCategory.Name}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ScrollViewer Grid.Column="0" Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
 
-            <ListView ItemsSource="{Binding CategoryList}" Background="DeepSkyBlue">
+            <ListView ItemsSource="{Binding CategoryList}" Background="#BCCCDC">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Background" Value="Transparent" />
@@ -41,7 +38,11 @@
 
                 <ListView.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Új kategória" Command="{Binding AddCategoryCommand}"/>
+                        <MenuItem Header="Új kategória" Command="{Binding AddCategoryCommand}">
+                            <MenuItem.Icon>
+                                <Image Stretch="UniformToFill" Source="{StaticResource newIcon}"></Image>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </ListView.ContextMenu>
             </ListView>
@@ -58,7 +59,11 @@
                 </ItemsControl>
             <ScrollViewer.ContextMenu>
                 <ContextMenu>
-                    <MenuItem  Header="Új jegyzet" Command="{Binding UpdateViewCommand}" CommandParameter="NoteModifyViewN"/>
+                    <MenuItem  Header="Új jegyzet" Command="{Binding UpdateViewCommand}" CommandParameter="NoteModifyViewN">
+                        <MenuItem.Icon>
+                            <Image Stretch="UniformToFill" Source="{StaticResource newIcon}"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </ScrollViewer.ContextMenu>
         </ScrollViewer>
