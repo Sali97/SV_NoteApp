@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="SV_NoteApp.View.NoteModifyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SV_NoteApp.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="250*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="240*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Background="LightGray" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
+
+        <TextBlock FontSize="14" Text="Cím:" Grid.Row="0" Grid.Column="0"/>
+        <TextBlock FontSize="14" Text="Kategória:" Grid.Row="1" Grid.Column="0"/>
+        <TextBlock FontSize="14" Text="Szöveg:" Grid.Row="2" Grid.Column="0"/>
+
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedNote.Title}"/>
+
+        <ComboBox Name="myComboBox" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=NoteCategoryList}"
+          SelectedValuePath="Name" IsTextSearchEnabled="True" Loaded="myComboBox_Loaded" SelectionChanged="myComboBox_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </Grid>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+        <TextBox Name="NoteText" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" TextWrapping="Wrap" Margin="2" AcceptsReturn="True" Text="{Binding SelectedNote.Text}"/>
+
+        <Button Grid.Row="4" Margin="2,2,2,2" Command="{Binding UpdateViewCommand}" CommandParameter="HomeView">
+            <TextBlock FontSize="12" VerticalAlignment="Center">Mégse</TextBlock>
+        </Button>
+
+        <Button Grid.Row="4" Grid.Column="1" Margin="5,2,5,2" Command="{Binding Path=AddNoteCommand}">
+            <TextBlock FontSize="12" VerticalAlignment="Center">Mentés</TextBlock>
+        </Button>
+    </Grid>
+
+
+</UserControl>

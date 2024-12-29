@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="SV_NoteApp.Utilities.NoteItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SV_NoteApp.Utilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="200" Margin="10,10,10,10" MaxHeight="150" MaxWidth="200" Cursor="Hand">
+    <UserControl.InputBindings>
+        <MouseBinding MouseAction="LeftClick" Command="{Binding Path=SelectCommand}"/>
+    </UserControl.InputBindings>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="43*"/>
+        </Grid.RowDefinitions>
+        <Separator Grid.Row="0" VerticalAlignment="Bottom" Width="3"/>
+
+        <Border Background="AliceBlue" CornerRadius="20" Grid.RowSpan="3" BorderBrush="Black" BorderThickness="1"/>
+
+        <TextBlock Margin="10,0,0,0" FontSize="32" Grid.Row="0" Text="{Binding MyNote.Title}"/>
+        <TextBlock Margin="10,10,10,10" FontSize="16" Grid.Row="1" TextWrapping="Wrap" Text="{Binding MyNote.Text}"/>
+
+   </Grid>
+    
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem  Header="Módosítás" Command="{Binding Path=EditNoteCommand}"/>
+            <MenuItem  Header="Törlés" Command="{Binding Path=DeleteNoteCommand}"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+</UserControl>   
+

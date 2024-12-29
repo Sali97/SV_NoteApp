@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="SV_NoteApp.Utilities.CategoryItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SV_NoteApp.Utilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="200" Cursor="Hand"
+             DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+    <UserControl.InputBindings>
+        <MouseBinding MouseAction="LeftClick" Command="{Binding Path=SelectCatCommand}"/>
+    </UserControl.InputBindings>
+
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem  Header="Módosítás" Command="{Binding Path=UpdateCatCommand}"/>
+            <MenuItem  Header="Törlés" Command="{Binding Path=DeleteCatCommand}"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+
+    <Grid Margin="5,2,5,2">
+        <Border Background="GhostWhite" CornerRadius="5" BorderBrush="Black" BorderThickness="1"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"  Text="{Binding Path=MyNoteCategory.Name}" Margin="5,5,5,5"/>
+    </Grid>
+</UserControl>
+    
