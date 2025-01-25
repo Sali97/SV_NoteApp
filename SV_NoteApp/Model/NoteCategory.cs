@@ -39,6 +39,5 @@ namespace SV_NoteApp.Model
             get { return name; }
             set { name = value; OnPropertyChanged("Name"); }
         }
-
     }
 }

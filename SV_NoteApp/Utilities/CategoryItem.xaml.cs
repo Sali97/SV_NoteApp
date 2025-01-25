@@ -29,7 +29,14 @@ namespace SV_NoteApp.Utilities
             get { return myNoteCategory; }
             set { myNoteCategory = value; OnPropertyChanged("MyNoteCategory"); }
         }
- 
+
+        private bool isActive;
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; OnPropertyChanged("IsActive"); }
+        }
+
         private ViewModelBase viewmodel;
 
         public CategoryItem(NoteCategory theCategory, ViewModelBase theViewModel)
@@ -39,10 +46,11 @@ namespace SV_NoteApp.Utilities
             UpdateCatCommand = new RelayCommand(UpdateCategory);
             DeleteCatCommand = new RelayCommand(DeleteCategory);
 
+            IsActive = false;
+
             viewmodel = theViewModel;
             MyNoteCategory = new NoteCategory();
             MyNoteCategory = theCategory;
-
 
             this.DataContext = this;
         }

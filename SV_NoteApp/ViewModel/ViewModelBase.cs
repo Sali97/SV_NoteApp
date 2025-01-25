@@ -130,6 +130,7 @@ namespace SV_NoteApp.ViewModel
         public void ChangeCategoryId(int catId)
         {
             SelectedCategoryId = catId;
+  
         }
 
 
@@ -270,4 +271,3 @@ namespace SV_NoteApp.ViewModel
         }
     }
 }
-//Kategória törlés,módosítás után a régi név marad bent

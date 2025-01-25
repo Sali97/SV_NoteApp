@@ -1,17 +1,5 @@
 ﻿using SV_NoteApp.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SV_NoteApp.Utilities
 {
@@ -34,7 +22,15 @@ namespace SV_NoteApp.Utilities
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            if (ResponseText.Length<=0||ResponseText.Trim(' ').Length<=0)
+            {
+                MessageBox.Show("Nem lehet üres a kategória neve!", "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                DialogResult = true;
+            }
+            
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

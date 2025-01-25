@@ -50,7 +50,16 @@ namespace SV_NoteApp.Utilities
                 viewModel.SelectedCategory.Id = (parameter as NoteCategory).Id;
                 viewModel.SelectedCategory.Name = (parameter as NoteCategory).Name;
             }
-           
+
+            foreach (CategoryItem item in viewModel.CategoryList)
+            {
+                if (item.MyNoteCategory.Id != viewModel.FilterCategory.Id)
+                {
+                    item.IsActive = false;
+                }
+                else { item.IsActive = true; }
+            }
+
         }
     }
 }

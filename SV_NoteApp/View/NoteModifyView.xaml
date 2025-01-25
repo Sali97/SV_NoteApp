@@ -18,16 +18,16 @@
             <RowDefinition Height="240*"/>
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
-        
-        <Border Background="LightGray" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
+
+        <Border Background="#BCCCDC" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
 
         <TextBlock FontSize="14" Text="Cím:" Grid.Row="0" Grid.Column="0"/>
         <TextBlock FontSize="14" Text="Kategória:" Grid.Row="1" Grid.Column="0"/>
         <TextBlock FontSize="14" Text="Szöveg:" Grid.Row="2" Grid.Column="0"/>
 
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedNote.Title}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedNote.Title}" Margin="0,2,2,0"/>
 
-        <ComboBox Name="myComboBox" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=NoteCategoryList}"
+        <ComboBox Margin="0,2,2,2" Name="myComboBox" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=NoteCategoryList}"
           SelectedValuePath="Name" IsTextSearchEnabled="True" Loaded="myComboBox_Loaded" SelectionChanged="myComboBox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -38,13 +38,13 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         
-        <TextBox Name="NoteText" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" TextWrapping="Wrap" Margin="2" AcceptsReturn="True" Text="{Binding SelectedNote.Text}"/>
+        <TextBox Name="NoteText" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" TextWrapping="Wrap" Margin="0,0,2,2" AcceptsReturn="True" Text="{Binding SelectedNote.Text}"/>
 
-        <Button Grid.Row="4" Margin="2,2,2,2" Command="{Binding UpdateViewCommand}" CommandParameter="HomeView">
+        <Button Grid.Row="4" Margin="2,2,5,2" Command="{Binding UpdateViewCommand}" CommandParameter="HomeView">
             <TextBlock FontSize="12" VerticalAlignment="Center">Mégse</TextBlock>
         </Button>
 
-        <Button Grid.Row="4" Grid.Column="1" Margin="5,2,5,2" Command="{Binding Path=AddNoteCommand}">
+        <Button Grid.Row="4" Grid.Column="1" Margin="0,2,2,2" Command="{Binding Path=AddNoteCommand}">
             <TextBlock FontSize="12" VerticalAlignment="Center">Mentés</TextBlock>
         </Button>
     </Grid>

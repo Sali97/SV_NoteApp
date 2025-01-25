@@ -20,11 +20,14 @@
         <Border Background="#D9EAFD" Grid.RowSpan="3" Grid.ColumnSpan="2"></Border>
 
 
-        <TextBlock Grid.Row="0" Grid.Column="1" FontSize="32" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.Title}" VerticalAlignment="Center"/>
+        <TextBlock Padding="0,0,0,5" Foreground="#2d2e2e" Grid.Row="0" Grid.Column="1" FontSize="36" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.Title}" VerticalAlignment="Center"/>
+        <Separator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,2,0,0"/>
 
-        <ScrollViewer Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer Margin="5" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="{Binding Path=SelectedNote.Text}"/>
         </ScrollViewer>
+        
+        
         
         <Button Cursor="Hand" Style="{StaticResource ImageButtonStyle}" Command="{Binding UpdateViewCommand}" CommandParameter="HomeView" Height="30" Width="45">
             <Image Source="{StaticResource backIcon}" Stretch="Uniform" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"/>
