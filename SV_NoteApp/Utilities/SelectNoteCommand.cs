@@ -1,5 +1,4 @@
-﻿using SV_NoteApp.Model;
-using SV_NoteApp.ViewModel;
+﻿using SV_NoteApp.ViewModel;
 using System;
 using System.Windows.Input;
 

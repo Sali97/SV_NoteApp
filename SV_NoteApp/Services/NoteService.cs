@@ -1,6 +1,7 @@
 ﻿using SV_NoteApp.Model;
 using SV_NoteApp.Utilities;
 using SV_NoteApp.ViewModel;
+using System;
 using System.Collections.Generic;
 
 namespace SV_NoteApp.Services
@@ -13,26 +14,19 @@ namespace SV_NoteApp.Services
         public List<CategoryItem> CategoryItemList = new List<CategoryItem>(); //Grafikusan megjelenített kategória elemek listája
         ViewModelBase viewmodel = null;
         private CategoryService theCategoryService;
+        private SQLService theNoteSQLService = new SQLService();
 
         int filterId = -1;
         public NoteService(ViewModelBase theViewModel)
         {
             viewmodel = theViewModel;
             theCategoryService = new CategoryService(viewmodel);
-            theCategoryService.test();
+            theCategoryService.getCategoriesFromSQL();
         }
-            public void test()
+            public void getNotesFromSQL()
         {
-            Add((new Note {Title = "Title1", Text = "The place of your text. Here will be your messages ad every informations what you want to collect.", CategoryId=1 }));
-            Add((new Note {Title = "Title2", Text = "This is the second note.", CategoryId = 1 }));
-            Add((new Note {Title = "Title3", Text = "Binding is working perfectly.", CategoryId = 3 }));
-            Add((new Note {Title = "Title4", Text = "Jó fasza.", CategoryId = 2 }));
-            Add((new Note {Title = "Title5", Text = "Működik végre ez a szartalicska.", CategoryId = 1 }));
-            Add((new Note {Title = "Title6", Text = "Nice, it is a beautiful.", CategoryId = 4 }));
-            Add((new Note { Title = "Title7", Text = "Es ist sehr gut jetzt.", CategoryId = 5 }));
-            Add((new Note {Title = "Title8", Text = "Elképzelhető, hogy ennek műküődése nagymértékben megkérdőjelezhető, de az eredmény magáért beszél.", CategoryId = 2 }));
-            Add((new Note { Title = "Title9", Text = "Egyszer csak elkészül ez a fostenger.", CategoryId = 8 }));
-            Add((new Note { Title = "Title10", Text = "Ami nem biztos az lehet, hogy nincs. Tehát ami nincs az nem biztos, hogy van. A létezése asszem mindenféleképpen megkérdőjelezhető annak, melynek nem vagyunk biztosak az ismeretáéről, hogy tudjuk-e pontosan, hogy mi az ami az-e ami nem az.", CategoryId = 8 }));
+            theNoteList = theNoteSQLService.Query("SELECT Id,Title,Text,CatId FROM Notes") as List<Note>;
+            refreshNoteItemList(filterId);
         }
 
         #region CategoryControl
@@ -67,8 +61,10 @@ namespace SV_NoteApp.Services
         public void Add(Note newNote)
         {
             newNote.Id = getIndexForNewNote();
-            theNoteList.Add(newNote);
 
+            SQLAdd(newNote);
+            theNoteList.Add(newNote);
+            
             refreshNoteItemList(filterId);
         }
 
@@ -119,14 +115,17 @@ namespace SV_NoteApp.Services
 
         public void Delete(Note deleteNote)
         {
+            SQLDelete(deleteNote.Id);
             theNoteList.Remove(FindItem(deleteNote.Id));
-
+            
             refreshNoteItemList(filterId);
         }
 
         public void Update(Note UpdateNote)
         {
             Note oldNote = FindItem(UpdateNote.Id);
+
+            SQLUpdate(UpdateNote);
 
             oldNote.Title = UpdateNote.Title;
             oldNote.Text = UpdateNote.Text;
@@ -185,5 +184,23 @@ namespace SV_NoteApp.Services
             return theCategoryService.getAll();
         }
 
+
+        private void SQLAdd(Note NewNote)
+        {
+            String commandtxt =String.Format ("INSERT INTO Notes VALUES({0},'{1}','{2}','{3}')", NewNote.Id.ToString(), NewNote.Title, NewNote.Text, NewNote.CategoryId.ToString());
+            theNoteSQLService.Execute(commandtxt);
+        }
+
+        private void SQLUpdate(Note UpdatedNote)
+        {
+            String commandtxt = String.Format("UPDATE Notes SET Title='{0}', Text='{1}', CatId={2} WHERE Id={3}",UpdatedNote.Title,UpdatedNote.Text, UpdatedNote.CategoryId.ToString(), UpdatedNote.Id.ToString());
+            theNoteSQLService.Execute(commandtxt);
+        }
+
+        private void SQLDelete(int NoteId)
+        {
+            String commandtxt = String.Format("DELETE FROM Notes WHERE Id={0}",NoteId);
+            theNoteSQLService.Execute(commandtxt);
+        }
     }
 }

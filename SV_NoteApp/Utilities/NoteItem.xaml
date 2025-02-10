@@ -18,7 +18,7 @@
 
         <Border  Background="#9AA6B2" CornerRadius="10" Grid.RowSpan="3" BorderBrush="Black" BorderThickness="1"/>
 
-        <TextBlock Margin="10,4,10,0" FontSize="32" Grid.Row="0" Text="{Binding MyNote.Title}"/>
+        <TextBlock Margin="10,4,10,0" FontSize="32" Grid.Row="0" Text="{Binding MyNote.Title}" TextTrimming="CharacterEllipsis"/>
         <TextBlock Margin="10,10,10,10" FontSize="16" Grid.Row="1" TextWrapping="Wrap" Text="{Binding MyNote.Text}"/>
 
    </Grid>

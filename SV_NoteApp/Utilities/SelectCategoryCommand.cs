@@ -1,11 +1,6 @@
 ﻿using SV_NoteApp.Model;
 using SV_NoteApp.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace SV_NoteApp.Utilities

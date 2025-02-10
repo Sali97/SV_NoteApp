@@ -6,8 +6,6 @@ using System.Windows.Input;
 using System.Collections.Generic;
 using SV_NoteApp.Model;
 using SV_NoteApp.Services;
-using System.Windows;
-using System.Xml.Linq;
 
 namespace SV_NoteApp.ViewModel
 {
@@ -119,7 +117,7 @@ namespace SV_NoteApp.ViewModel
             NoteList = new List<NoteItem>
             {  };
 
-            theNoteService.test();
+            theNoteService.getNotesFromSQL();
             NoteList = theNoteService.NoteItemList;
 
             CategoryList = new List<CategoryItem>
@@ -271,3 +269,4 @@ namespace SV_NoteApp.ViewModel
         }
     }
 }
+//KÖVETKEZŐ LÉPÉSEK: Dátum hozzáadása a módosításokhoz, adatbázis csatolása+vizuális módosítások

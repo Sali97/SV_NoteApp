@@ -1,6 +1,7 @@
 ﻿using SV_NoteApp.Model;
 using SV_NoteApp.Utilities;
 using SV_NoteApp.ViewModel;
+using System;
 using System.Collections.Generic;
 
 namespace SV_NoteApp.Services
@@ -9,27 +10,23 @@ namespace SV_NoteApp.Services
     {
         List<NoteCategory> theCategoryList = new List<NoteCategory>(); //Kategória elemek listája
         ViewModelBase viewmodel = null;
+        private SQLService theCategorySQLService = new SQLService();
 
         public CategoryService(ViewModelBase theViewModel)
         {
             viewmodel = theViewModel;
         }
 
-        public void test()
+        public void getCategoriesFromSQL()
         {
-            theCategoryList.Add(new NoteCategory { Id = 8, Name = "Angol jegyzetek" });
-            theCategoryList.Add(new NoteCategory { Id = 1, Name = "2024-12-05" });
-            theCategoryList.Add(new NoteCategory { Id = 2, Name = "Mikulás viccek" });
-            theCategoryList.Add(new NoteCategory { Id = 3, Name = "Családi" });
-            theCategoryList.Add(new NoteCategory { Id = 4, Name = "---Titkos---" });
-            theCategoryList.Add(new NoteCategory { Id = 5, Name = "Bevásárlólista" });
-            theCategoryList.Add(new NoteCategory { Id = 6, Name = "Teendők" });
-            theCategoryList.Add(new NoteCategory { Id = 7, Name = "Egyéb" });
+            theCategoryList = theCategorySQLService.Query("SELECT Id,Name FROM Categories") as List<NoteCategory>;
         }
 
         public void Add(NoteCategory newCategory)
         {
             newCategory.Id = getIndexForNewNote();
+
+            SQLAdd(newCategory);
             theCategoryList.Add(newCategory);
         }
         private NoteCategory FindItem(int searchIndex)
@@ -73,14 +70,15 @@ namespace SV_NoteApp.Services
 
         public void Delete(int deleteIndex)
         {
+            SQLDelete(deleteIndex);
             theCategoryList.Remove(FindItem(deleteIndex));
-
         }
 
         public void Update(NoteCategory UpdateCategory)
         {
             NoteCategory oldCategory = FindItem(UpdateCategory.Id);
 
+            SQLUpdate(UpdateCategory);
             oldCategory.Name = UpdateCategory.Name;
 
         }
@@ -106,6 +104,24 @@ namespace SV_NoteApp.Services
         public List<NoteCategory> getAll()
         {
             return theCategoryList;
+        }
+
+        private void SQLAdd(NoteCategory NewNoteCategory)
+        {
+            String commandtxt = String.Format("INSERT INTO Categories VALUES({0},'{1}')", NewNoteCategory.Id.ToString(), NewNoteCategory.Name);
+            theCategorySQLService.Execute(commandtxt);
+        }
+
+        private void SQLUpdate(NoteCategory UpdatedNoteCategory)
+        {
+            String commandtxt = String.Format("UPDATE Categories SET Name='{0}' WHERE Id={1}", UpdatedNoteCategory.Name, UpdatedNoteCategory.Id);
+            theCategorySQLService.Execute(commandtxt);
+        }
+
+        private void SQLDelete(int CategoryId)
+        {
+            String commandtxt = String.Format("DELETE FROM Categories WHERE Id={0}", CategoryId);
+            theCategorySQLService.Execute(commandtxt);
         }
     }
 }
