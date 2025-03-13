@@ -8,7 +8,7 @@
              d:DesignHeight="400" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="200*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
         <Border Background="#D9EAFD" Grid.RowSpan="3" Grid.ColumnSpan="2"></Border>
 
 
-        <TextBlock Padding="0,0,0,5" Foreground="#2d2e2e" Grid.Row="0" Grid.Column="1" FontSize="36" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.Title}" VerticalAlignment="Center"/>
+        <TextBlock TextTrimming="CharacterEllipsis" Padding="0,5,0,5" Foreground="#2d2e2e" Grid.Row="0" Grid.Column="1" FontSize="36" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.Title}" VerticalAlignment="Center"/>
         <Separator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,2,0,0"/>
 
         <ScrollViewer Margin="5" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
@@ -29,7 +29,7 @@
         
         
         
-        <Button Cursor="Hand" Style="{StaticResource ImageButtonStyle}" Command="{Binding UpdateViewCommand}" CommandParameter="HomeView" Height="30" Width="45">
+        <Button Margin="5,2,2,2" Cursor="Hand" Style="{StaticResource ImageButtonStyle}" Command="{Binding UpdateViewCommand}" CommandParameter="HomeView" Height="30" Width="45">
             <Image Source="{StaticResource backIcon}" Stretch="Uniform" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"/>
         </Button>
     </Grid>

@@ -3,6 +3,7 @@ using SV_NoteApp.Model;
 using System.ComponentModel;
 using System.Windows.Input;
 using SV_NoteApp.ViewModel;
+using System.Windows;
 
 namespace SV_NoteApp.Utilities
 {
@@ -45,6 +46,7 @@ namespace SV_NoteApp.Utilities
             EditNoteCommand = new RelayCommand(EditNote);
             DeleteNoteCommand = new RelayCommand(DeleteNote);
             SelectCommand = new RelayCommand(SelectNote);
+            ChangePrioNoteCommand = new RelayCommand(PrioCheckNote);
         }
 
         public ICommand SelectNoteCommand { get; set; }
@@ -52,6 +54,7 @@ namespace SV_NoteApp.Utilities
         public RelayCommand EditNoteCommand { get; set; }
         public RelayCommand DeleteNoteCommand { get; set; }
         public RelayCommand SelectCommand { get; set; }
+        public RelayCommand ChangePrioNoteCommand { get; set; }
 
 
         private void SelectNote()
@@ -78,6 +81,20 @@ namespace SV_NoteApp.Utilities
             SelectNoteCommand.Execute(MyNote);
 
             viewmodel.DeleteNoteCommand.Execute(MyNote);
+        }
+
+        private void PrioCheckNote()
+        {
+            if (myNote.IsPrio)
+            {
+                myNote.IsPrio = false;
+            }
+            else { myNote.IsPrio = true; }
+
+            SelectNoteCommand = new SelectNoteCommand(viewmodel);
+            SelectNoteCommand.Execute(MyNote);
+
+            viewmodel.AddNoteCommand.Execute(MyNote);
         }
 
 

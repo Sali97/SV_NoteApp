@@ -8,6 +8,7 @@
         <BitmapImage x:Key="editIcon" UriSource="res/Image/editIcon.png"></BitmapImage>
         <BitmapImage x:Key="newIcon" UriSource="res/Image/newIcon.png"></BitmapImage>
         <BitmapImage x:Key="backIcon" UriSource="res/Image/backIcon.png"></BitmapImage>
+        <BitmapImage x:Key="prioIcon" UriSource="res/Image/prioIcon.png"></BitmapImage>
 
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
             <Setter Property="Template">

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Windows.Forms;
 
 namespace SV_NoteApp.Services
 {
@@ -32,12 +33,12 @@ namespace SV_NoteApp.Services
                     }
                     theResult = CategoryList;
                 }
-                else if (sqlReader.FieldCount == 4)
+                else if (sqlReader.FieldCount > 2)
                 {
                     List<Note> NoteList = new List<Note>();
                     while (sqlReader.Read())
                     {
-                        NoteList.Add((new Note {Id= sqlReader.GetInt32(0),  Title = sqlReader.GetString(1), Text = sqlReader.GetString(2), CategoryId = sqlReader.GetInt32(3) }));
+                        NoteList.Add((new Note {Id= sqlReader.GetInt32(0),  Title = sqlReader.GetString(1), Text = sqlReader.GetString(2), CategoryId = sqlReader.GetInt32(3), CreateDate = sqlReader.GetString(4), ModifyDate=sqlReader.GetString(5), IsPrio=sqlReader.GetBoolean(6) }));
                     }
                     theResult = NoteList;
                 }

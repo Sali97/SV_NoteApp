@@ -3,6 +3,8 @@ using SV_NoteApp.Utilities;
 using SV_NoteApp.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Windows.Forms;
 
 namespace SV_NoteApp.Services
 {
@@ -25,7 +27,7 @@ namespace SV_NoteApp.Services
         }
             public void getNotesFromSQL()
         {
-            theNoteList = theNoteSQLService.Query("SELECT Id,Title,Text,CatId FROM Notes") as List<Note>;
+            theNoteList = theNoteSQLService.Query("SELECT Id,Title,Text,CatId,CreateDate,ModifyDate,isPrio FROM Notes") as List<Note>;
             refreshNoteItemList(filterId);
         }
 
@@ -130,6 +132,8 @@ namespace SV_NoteApp.Services
             oldNote.Title = UpdateNote.Title;
             oldNote.Text = UpdateNote.Text;
             oldNote.CategoryId = UpdateNote.CategoryId;
+            oldNote.ModifyDate = UpdateNote.ModifyDate;
+            oldNote.IsPrio = UpdateNote.IsPrio;
 
             refreshNoteItemList(filterId);
         }
@@ -187,13 +191,13 @@ namespace SV_NoteApp.Services
 
         private void SQLAdd(Note NewNote)
         {
-            String commandtxt =String.Format ("INSERT INTO Notes VALUES({0},'{1}','{2}','{3}')", NewNote.Id.ToString(), NewNote.Title, NewNote.Text, NewNote.CategoryId.ToString());
+            String commandtxt =String.Format ("INSERT INTO Notes VALUES({0},'{1}','{2}','{3}', '{4}', '{4}', {5})", NewNote.Id.ToString(), NewNote.Title, NewNote.Text, NewNote.CategoryId.ToString(), System.DateTime.Now, NewNote.IsPrio);
             theNoteSQLService.Execute(commandtxt);
         }
 
         private void SQLUpdate(Note UpdatedNote)
         {
-            String commandtxt = String.Format("UPDATE Notes SET Title='{0}', Text='{1}', CatId={2} WHERE Id={3}",UpdatedNote.Title,UpdatedNote.Text, UpdatedNote.CategoryId.ToString(), UpdatedNote.Id.ToString());
+            String commandtxt = String.Format("UPDATE Notes SET Title='{0}', Text='{1}', CatId={2}, ModifyDate='{3}', isPrio={4} WHERE Id={5}",UpdatedNote.Title,UpdatedNote.Text, UpdatedNote.CategoryId.ToString(), System.DateTime.Now, UpdatedNote.IsPrio,UpdatedNote.Id.ToString());
             theNoteSQLService.Execute(commandtxt);
         }
 

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Collections.Generic;
 using SV_NoteApp.Model;
 using SV_NoteApp.Services;
+using System.Windows;
 
 namespace SV_NoteApp.ViewModel
 {
@@ -107,6 +108,7 @@ namespace SV_NoteApp.ViewModel
             updateNoteCommand = new RelayCommand(UpdateNote);
             deleteNoteCommand = new RelayCommand(DeleteNote);
             filterNoteCommand = new RelayCommand(FilterNote);
+
             #endregion
             #region CategoryCommands
             addCategoryCommand = new RelayCommand(AddCategory);
@@ -147,6 +149,9 @@ namespace SV_NoteApp.ViewModel
             theNote.Title = (SelectedNote as Note).Title;
             theNote.Text = (SelectedNote as Note).Text;
             theNote.CategoryId = SelectedCategoryId;
+            theNote.IsPrio = (SelectedNote as Note).IsPrio;
+            theNote.CreateDate = System.DateTime.Now.ToString();
+            theNote.ModifyDate = System.DateTime.Now.ToString();
 
             if (theNoteService.HasThis(theNote.Id))
             {
@@ -173,6 +178,9 @@ namespace SV_NoteApp.ViewModel
             theNote.Title = (SelectedNote as Note).Title;
             theNote.Text = (SelectedNote as Note).Text;
             theNote.CategoryId = SelectedCategoryId;
+            theNote.IsPrio = (SelectedNote as Note).IsPrio;
+            theNote.CreateDate = System.DateTime.Now.ToString();
+            theNote.ModifyDate = System.DateTime.Now.ToString();
 
             theNoteService.Update(theNote);
             RefreshView();
