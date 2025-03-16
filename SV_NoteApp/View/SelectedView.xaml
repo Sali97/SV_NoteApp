@@ -10,6 +10,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="200*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
@@ -17,13 +19,16 @@
         </Grid.ColumnDefinitions>
 
 
-        <Border Background="#D9EAFD" Grid.RowSpan="3" Grid.ColumnSpan="2"></Border>
+        <Border Background="#D9EAFD" Grid.RowSpan="4" Grid.ColumnSpan="2"></Border>
 
 
         <TextBlock TextTrimming="CharacterEllipsis" Padding="0,5,0,5" Foreground="#2d2e2e" Grid.Row="0" Grid.Column="1" FontSize="36" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.Title}" VerticalAlignment="Center"/>
         <Separator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,2,0,0"/>
 
-        <ScrollViewer Margin="5" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#2d2e2e" Grid.Row="2" Grid.Column="0" FontSize="8" FontStyle="Oblique" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.CreateDate}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#2d2e2e" Grid.Row="3" Grid.Column="0" FontSize="8" FontStyle="Oblique" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.ModifyDate}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+
+        <ScrollViewer Margin="5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="{Binding Path=SelectedNote.Text}"/>
         </ScrollViewer>
         
