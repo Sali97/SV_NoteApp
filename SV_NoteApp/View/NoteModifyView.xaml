@@ -5,21 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SV_NoteApp.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
-    <Grid>
+             d:DesignHeight="300" d:DesignWidth="400" Background="#BCCCDC">
+    <Grid Margin="6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="250*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="240*"/>
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
-
-        <Border Background="#BCCCDC" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
 
         <TextBlock FontSize="14" Text="Cím:" Grid.Row="0" Grid.Column="0"/>
         <TextBlock FontSize="14" Text="Kategória:" Grid.Row="1" Grid.Column="0"/>

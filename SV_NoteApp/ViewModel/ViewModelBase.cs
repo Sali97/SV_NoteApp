@@ -153,10 +153,13 @@ namespace SV_NoteApp.ViewModel
             theNote.CreateDate = System.DateTime.Now.ToString();
             theNote.ModifyDate = System.DateTime.Now.ToString();
 
+         
+
             if (theNoteService.HasThis(theNote.Id))
             {
                 UpdateNote();
-            }else
+            }
+            else
             {
                 theNoteService.Add(theNote);
             }
@@ -177,10 +180,18 @@ namespace SV_NoteApp.ViewModel
             theNote.Id = (SelectedNote as Note).Id;
             theNote.Title = (SelectedNote as Note).Title;
             theNote.Text = (SelectedNote as Note).Text;
-            theNote.CategoryId = SelectedCategoryId;
             theNote.IsPrio = (SelectedNote as Note).IsPrio;
             theNote.CreateDate = System.DateTime.Now.ToString();
             theNote.ModifyDate = System.DateTime.Now.ToString();
+
+            if (SelectedCategoryId == 0)
+            {
+                theNote.CategoryId = (SelectedNote as Note).CategoryId;
+            }
+            else
+            {
+                theNote.CategoryId = SelectedCategoryId;
+            }
 
             theNoteService.Update(theNote);
             RefreshView();
@@ -277,4 +288,3 @@ namespace SV_NoteApp.ViewModel
         }
     }
 }
-//KÖVETKEZŐ LÉPÉSEK: Dátum hozzáadása a módosításokhoz, adatbázis csatolása+vizuális módosítások

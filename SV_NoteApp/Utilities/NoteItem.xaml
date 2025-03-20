@@ -12,9 +12,9 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="30*"/>
             <RowDefinition Height="45*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -22,7 +22,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border Background="#9AA6B2" CornerRadius="10" Grid.RowSpan="4" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1"/>
+        <Border Background="#9AA6B2" CornerRadius="10" Grid.RowSpan="4" Grid.ColumnSpan="2" Style="{StaticResource NoteItemBorderStyle}"/>
+
 
         <TextBlock Margin="10,4,10,0" FontSize="32" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding MyNote.Title}" TextTrimming="CharacterEllipsis"/>
         <TextBlock Margin="10,8,10,5" FontSize="16" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="{Binding MyNote.Text}" TextTrimming="CharacterEllipsis"/>

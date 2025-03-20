@@ -85,11 +85,11 @@ namespace SV_NoteApp.Utilities
 
         private void PrioCheckNote()
         {
-            if (myNote.IsPrio)
+            if (MyNote.IsPrio)
             {
-                myNote.IsPrio = false;
+                MyNote.IsPrio = false;
             }
-            else { myNote.IsPrio = true; }
+            else { MyNote.IsPrio = true; }
 
             SelectNoteCommand = new SelectNoteCommand(viewmodel);
             SelectNoteCommand.Execute(MyNote);
