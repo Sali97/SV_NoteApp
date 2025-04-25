@@ -8,39 +8,39 @@
              d:DesignHeight="400" d:DesignWidth="300" Background="#D9EAFD">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="200*"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
 
-        <TextBlock TextTrimming="CharacterEllipsis" Padding="0,5,0,5" Foreground="#2d2e2e" Grid.Row="0" Grid.Column="1" FontSize="36" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.Title}" VerticalAlignment="Center"/>
-        <Separator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,2,0,0"/>
+        <TextBox Padding="0,5,0,5" Foreground="#2d2e2e" Grid.Row="0" Grid.Column="1" FontSize="36" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.Title}" ToolTip="{Binding Path=SelectedNote.Title}" VerticalAlignment="Center" Style="{StaticResource SelectableTextBlockStlye}"/>
+        <Separator Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,2,20,0"/>
 
 
-        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#000" Grid.Row="4" Grid.Column="0" FontSize="8" FontStyle="Normal" HorizontalAlignment="Left"  Text="Létrehozva:" VerticalAlignment="Top" TextWrapping="Wrap"/>
-        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#000" Grid.Row="6" Grid.Column="0" FontSize="8" FontStyle="Normal" HorizontalAlignment="Left"  Text="Módosítva:" VerticalAlignment="Top" TextWrapping="Wrap"/>
+        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#000" Grid.Row="4" Grid.Column="0" FontSize="10" FontStyle="Normal" HorizontalAlignment="Left"  Text="Létrehozva:" VerticalAlignment="Top" TextWrapping="Wrap"/>
+        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#000" Grid.Row="6" Grid.Column="0" FontSize="10" FontStyle="Normal" HorizontalAlignment="Left"  Text="Módosítva:" VerticalAlignment="Top" TextWrapping="Wrap"/>
 
-        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#2d2e2e" Grid.Row="5" Grid.Column="0" FontSize="8" FontStyle="Oblique" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.CreateDate}" VerticalAlignment="Top" TextWrapping="Wrap"/>
-        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#2d2e2e" Grid.Row="7" Grid.Column="0" FontSize="8" FontStyle="Oblique" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.ModifyDate}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#2d2e2e" Grid.Row="5" Grid.Column="0" FontSize="10" FontStyle="Oblique" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.CreateDate}" VerticalAlignment="Top" TextWrapping="Wrap" ToolTip="{Binding Path=SelectedNote.CreateDate}"/>
+        <TextBlock TextTrimming="CharacterEllipsis" Margin="5,0,0,0" Foreground="#2d2e2e" Grid.Row="7" Grid.Column="0" FontSize="10" FontStyle="Oblique" HorizontalAlignment="Center"  Text="{Binding Path=SelectedNote.ModifyDate}" VerticalAlignment="Top" TextWrapping="Wrap" ToolTip="{Binding Path=SelectedNote.ModifyDate}"/>
 
-        <ScrollViewer Margin="5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="7" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="{Binding Path=SelectedNote.Text}"/>
+        <ScrollViewer Margin="5,5,20,5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="7" CanContentScroll="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="{Binding Path=SelectedNote.Text}" Style="{StaticResource SelectableTextBlockStlye}"/>
         </ScrollViewer>
         
         
         
         <Button Margin="5,2,2,2" Cursor="Hand" Style="{StaticResource ImageButtonStyle}" Command="{Binding UpdateViewCommand}" CommandParameter="HomeView" Height="30" Width="45">
-            <Image Source="{StaticResource backIcon}" Stretch="Uniform" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"/>
+            <Image Source="{StaticResource backIcon}" Style="{StaticResource BackButtonImageStyle}" Stretch="Uniform" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"/>
         </Button>
     </Grid>
 </UserControl>

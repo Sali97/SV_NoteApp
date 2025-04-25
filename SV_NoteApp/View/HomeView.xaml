@@ -9,7 +9,7 @@
              xmlns:vw="clr-namespace:SV_NoteApp.Utilities">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140" MinWidth="140"/>
+            <ColumnDefinition Width="auto" MinWidth="140"/>
             <ColumnDefinition Width="550*" MinWidth="550"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SV_NoteApp.Utilities"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="200" Margin="10,10,10,10" MaxHeight="150" MaxWidth="250" Cursor="Hand">
+             d:DesignHeight="150" d:DesignWidth="200" Margin="10,10,10,10" MaxHeight="150" MaxWidth="300" Cursor="Hand">
     <UserControl.InputBindings>
         <MouseBinding MouseAction="LeftClick" Command="{Binding Path=SelectCommand}"/>
     </UserControl.InputBindings>
-    
+
+    <Border CornerRadius="10" Grid.RowSpan="4" Grid.ColumnSpan="2" Style="{StaticResource NoteItemBorderStyle}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30*"/>
@@ -22,15 +23,13 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border Background="#9AA6B2" CornerRadius="10" Grid.RowSpan="4" Grid.ColumnSpan="2" Style="{StaticResource NoteItemBorderStyle}"/>
-
-
         <TextBlock Margin="10,4,10,0" FontSize="32" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding MyNote.Title}" TextTrimming="CharacterEllipsis"/>
         <TextBlock Margin="10,8,10,5" FontSize="16" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="{Binding MyNote.Text}" TextTrimming="CharacterEllipsis"/>
 
         <TextBlock Padding="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="8" FontStyle="Oblique" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" Text="{Binding MyNote.ModifyDate}"/>
     </Grid>
-    
+    </Border>
+
     <UserControl.ContextMenu>
         <ContextMenu>
             <MenuItem Header="Módosítás" Command="{Binding Path=EditNoteCommand}">

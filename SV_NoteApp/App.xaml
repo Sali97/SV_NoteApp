@@ -22,6 +22,7 @@
 
 
         <Style TargetType="{x:Type Border}" x:Key="NoteItemBorderStyle">
+            <Setter Property="Background" Value="#9AA6B2"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Style.Triggers>
@@ -29,7 +30,50 @@
                     <Setter Property="BorderBrush" Value="Red"/>
                     <Setter Property="BorderThickness" Value="2"/>
                 </DataTrigger>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#b1bdc9"/>
+                </Trigger>
             </Style.Triggers>
         </Style>
+
+        
+
+        <Style TargetType="{x:Type Border}" x:Key="CategoryItemBorderStyle">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsActive}" Value="False" >
+                    <Setter Property="Background" Value="#F8FAFC"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsActive}" Value="True" >
+                    <Setter Property="Background" Value="#a7abb0"/>
+                </DataTrigger>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#e1e3e6"/>
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style TargetType="{x:Type TextBox}" x:Key="SelectableTextBlockStlye">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style TargetType="{x:Type Image}" x:Key="BackButtonImageStyle">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect ShadowDepth="3" Opacity="0.2"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Application.Resources>
 </Application>
