@@ -8,10 +8,10 @@ namespace SV_NoteApp.Services
 {
     public class CategoryService
     {
-        List<NoteCategory> theCategoryList = new List<NoteCategory>(); //Kategória elemek listája
+        List<NoteCategory> theCategoryList; //Kategória elemek listája
         ViewModelBase viewmodel = null;
         private SQLService theCategorySQLService = new SQLService();
-
+        
         public CategoryService(ViewModelBase theViewModel)
         {
             viewmodel = theViewModel;
@@ -45,14 +45,19 @@ namespace SV_NoteApp.Services
         private int MaxOfId()
         {
             int max = 0;
-            foreach (NoteCategory item in theCategoryList)
+            if (theCategoryList !=null)
+            {
+                  foreach (NoteCategory item in theCategoryList)
             {
                 if (item.Id > max)
                 {
                     max = item.Id;
                 }
             }
-            return max;
+            }
+            else { theCategoryList = new List<NoteCategory>(); }
+
+                return max;
         }
 
         public bool HasThis(int searchIndex)
@@ -93,12 +98,16 @@ namespace SV_NoteApp.Services
         {
             List<CategoryItem> theCategoryItemsList = new List<CategoryItem>();
 
-            foreach (NoteCategory item in theCategoryList)
+            if (theCategoryList != null)
             {
-                theCategoryItemsList.Add(getNoteItem(item));
+                foreach (NoteCategory item in theCategoryList)
+                {
+                    theCategoryItemsList.Add(getNoteItem(item));
+                }
             }
+            else { }
 
-            return theCategoryItemsList;
+                return theCategoryItemsList;
         }
 
         public List<NoteCategory> getAll()

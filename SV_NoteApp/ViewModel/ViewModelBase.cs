@@ -6,7 +6,6 @@ using System.Windows.Input;
 using System.Collections.Generic;
 using SV_NoteApp.Model;
 using SV_NoteApp.Services;
-using System.Windows;
 
 namespace SV_NoteApp.ViewModel
 {
@@ -153,16 +152,18 @@ namespace SV_NoteApp.ViewModel
             theNote.CreateDate = System.DateTime.Now.ToString();
             theNote.ModifyDate = System.DateTime.Now.ToString();
 
-         
 
-            if (theNoteService.HasThis(theNote.Id))
-            {
-                UpdateNote();
-            }
-            else
-            {
-                theNoteService.Add(theNote);
-            }
+          
+                if (theNoteService.HasThis(theNote.Id))
+                {
+                    UpdateNote();
+                }
+                else
+                {
+                    theNoteService.Add(theNote);
+                }
+            
+           
 
             UpdateViewCommand.Execute("HomeView");
             RefreshView();

@@ -3,12 +3,10 @@ using SV_NoteApp.Utilities;
 using SV_NoteApp.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Windows.Forms;
 
 namespace SV_NoteApp.Services
 {
-
+   
     public class NoteService
     {
         List<Note> theNoteList = new List<Note>(); //Elemek listája
@@ -63,10 +61,11 @@ namespace SV_NoteApp.Services
         public void Add(Note newNote)
         {
             newNote.Id = getIndexForNewNote();
-
+        
             SQLAdd(newNote);
             theNoteList.Add(newNote);
-            
+         
+           
             refreshNoteItemList(filterId);
         }
 
@@ -79,13 +78,16 @@ namespace SV_NoteApp.Services
         private Note FindItem(int searchIndex)
         {
             Note result = new Note();
-            result = theNoteList.Find(x => x.Id == searchIndex);
+
+                result = theNoteList.Find(x => x.Id == searchIndex);
+            
             return result;
         }
 
         private int getIndexForNewNote()
         {
             int maxindex = MaxOfId();
+            
             return maxindex + 1;
         }
 
@@ -148,6 +150,7 @@ namespace SV_NoteApp.Services
         public List<NoteItem> getNoteItems(int filterId)
         {
             NoteItemList.Clear();
+            if (theNoteList != null) { 
             foreach (Note item in theNoteList)
             {
                 if (filterId>0)
@@ -161,6 +164,7 @@ namespace SV_NoteApp.Services
                 {
                     NoteItemList.Add(getNoteItem(item));
                 }   
+            }
             }
 
             return NoteItemList;  
