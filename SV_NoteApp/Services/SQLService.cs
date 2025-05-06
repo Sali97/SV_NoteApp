@@ -2,14 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.IO;
 
 namespace SV_NoteApp.Services
 {
     public class SQLService
     {
-        static String TestPath = "E:\\_DATABASE\\SV_NoteApp\\";
+        //static String TestPath = "E:\\_DATABASE\\SV_NoteApp\\db\\";
         static String AppPath = AppDomain.CurrentDomain.BaseDirectory + "\\res\\db\\";
-        static SQLiteConnection sqlCon = new SQLiteConnection($"Data Source={TestPath}dbNote.db; Version=3;");
+        static String thePath = AppPath;
+        static SQLiteConnection sqlCon = new SQLiteConnection($"Data Source={thePath}dbNote.db; Version=3;");
+        
 
         public Object Query(String command)
         {
@@ -74,19 +77,32 @@ namespace SV_NoteApp.Services
             sqlCon.Close();
         }
 
- private Boolean hasTheTables()
+        private Boolean checkDirectory()
+        {
+            bool hasDBPath = Directory.Exists(thePath);
+
+            if (!hasDBPath)
+            {
+                Directory.CreateDirectory(thePath);
+            }
+
+            return hasDBPath;
+        }
+
+    private Boolean hasTheTables()
         {
             bool hasTables = false;
 
             bool hasNotes = false;
             bool hasCategories = false;
 
+            checkDirectory();
+
             List<string> sqlReaderTables = getTables();
 
-            if (sqlReaderTables.Contains("Notes")) { hasNotes = true; } else { generateTable("Notes"); }
-            if (sqlReaderTables.Contains("Categories")) { hasCategories = true; } else { generateTable("Categories"); }
-            if (hasNotes & hasCategories) { hasTables = true; }
-
+                if (sqlReaderTables.Contains("Notes")) { hasNotes = true; } else { generateTable("Notes"); }
+                if (sqlReaderTables.Contains("Categories")) { hasCategories = true; } else { generateTable("Categories"); }
+                if (hasNotes & hasCategories) { hasTables = true; }
 
             return hasTables;
         }
