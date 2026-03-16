@@ -201,7 +201,7 @@ namespace SV_NoteApp.ViewModel
             theNote.CreateDate = System.DateTime.Now.ToString();
             theNote.ModifyDate = System.DateTime.Now.ToString();
 
-            if (SelectedCategoryId == 0)
+            if (SelectedCategoryId == 0 || SelectedCategoryId == -10)
             {
                 theNote.CategoryId = (SelectedNote as Note).CategoryId;
             }
@@ -270,6 +270,7 @@ namespace SV_NoteApp.ViewModel
         {
             filterCategory.Id = -10;
             filterCategory.Name = "--Archívum--";
+            SelectedCategoryId = -10;
             FilterNote();
         }
 

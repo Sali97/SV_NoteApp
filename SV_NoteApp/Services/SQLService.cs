@@ -8,9 +8,9 @@ namespace SV_NoteApp.Services
 {
     public class SQLService
     {
-        static String TestPath = "E:\\_DATABASE\\SV_NoteApp\\db\\";
+        //static String TestPath = "E:\\_DATABASE\\SV_NoteApp\\db\\";
         static String AppPath = AppDomain.CurrentDomain.BaseDirectory + "\\res\\db\\";
-        static String thePath = TestPath;
+        static String thePath = AppPath;
         static SQLiteConnection sqlCon = new SQLiteConnection($"Data Source={thePath}dbNote.db; Version=3;");
         
 

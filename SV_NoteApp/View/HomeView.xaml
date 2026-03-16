@@ -23,7 +23,7 @@
         </Border>
         <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding FilterCategory.Name}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ScrollViewer Grid.Column="0" Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
-            <ListView ItemsSource="{Binding CategoryList}" Style="{StaticResource CategoryListStyle}">
+            <ListView ItemsSource="{Binding CategoryList, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CategoryListStyle}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Background" Value="Transparent" />
@@ -51,7 +51,7 @@
 
 
         <ScrollViewer Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding NoteList}">
+            <ItemsControl ItemsSource="{Binding NoteList, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
