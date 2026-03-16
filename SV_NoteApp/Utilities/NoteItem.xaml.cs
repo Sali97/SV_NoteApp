@@ -47,6 +47,7 @@ namespace SV_NoteApp.Utilities
             DeleteNoteCommand = new RelayCommand(DeleteNote);
             SelectCommand = new RelayCommand(SelectNote);
             ChangePrioNoteCommand = new RelayCommand(PrioCheckNote);
+            ChangeArchiveNoteCommand = new RelayCommand(ArchiveChangeNote);
         }
 
         public ICommand SelectNoteCommand { get; set; }
@@ -55,6 +56,7 @@ namespace SV_NoteApp.Utilities
         public RelayCommand DeleteNoteCommand { get; set; }
         public RelayCommand SelectCommand { get; set; }
         public RelayCommand ChangePrioNoteCommand { get; set; }
+        public RelayCommand ChangeArchiveNoteCommand { get; set; }
 
 
         private void SelectNote()
@@ -90,6 +92,20 @@ namespace SV_NoteApp.Utilities
                 MyNote.IsPrio = false;
             }
             else { MyNote.IsPrio = true; }
+
+            SelectNoteCommand = new SelectNoteCommand(viewmodel);
+            SelectNoteCommand.Execute(MyNote);
+
+            viewmodel.AddNoteCommand.Execute(MyNote);
+        }
+
+        private void ArchiveChangeNote()
+        {
+            if (MyNote.IsArchived)
+            {
+                MyNote.IsArchived = false;
+            }
+            else { MyNote.IsArchived = true; }
 
             SelectNoteCommand = new SelectNoteCommand(viewmodel);
             SelectNoteCommand.Execute(MyNote);

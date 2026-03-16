@@ -107,6 +107,7 @@ namespace SV_NoteApp.ViewModel
             updateNoteCommand = new RelayCommand(UpdateNote);
             deleteNoteCommand = new RelayCommand(DeleteNote);
             filterNoteCommand = new RelayCommand(FilterNote);
+            filterArchivesCommand = new RelayCommand(FilterArchives);
 
             #endregion
             #region CategoryCommands
@@ -129,7 +130,6 @@ namespace SV_NoteApp.ViewModel
         public void ChangeCategoryId(int catId)
         {
             SelectedCategoryId = catId;
-  
         }
 
 
@@ -149,6 +149,7 @@ namespace SV_NoteApp.ViewModel
             theNote.Text = (SelectedNote as Note).Text;
             theNote.CategoryId = SelectedCategoryId;
             theNote.IsPrio = (SelectedNote as Note).IsPrio;
+            theNote.IsArchived = (SelectedNote as Note).IsArchived;
             theNote.CreateDate = System.DateTime.Now.ToString();
             theNote.ModifyDate = System.DateTime.Now.ToString();
 
@@ -182,6 +183,7 @@ namespace SV_NoteApp.ViewModel
             theNote.Title = (SelectedNote as Note).Title;
             theNote.Text = (SelectedNote as Note).Text;
             theNote.IsPrio = (SelectedNote as Note).IsPrio;
+            theNote.IsArchived = (SelectedNote as Note).IsArchived;
             theNote.CreateDate = System.DateTime.Now.ToString();
             theNote.ModifyDate = System.DateTime.Now.ToString();
 
@@ -226,6 +228,23 @@ namespace SV_NoteApp.ViewModel
             theNoteService.FilterNotes(FilterCategory.Id);
             RefreshView();
         }
+        #endregion
+
+        #region FilterArchivesOperation
+        private RelayCommand filterArchivesCommand;
+
+        public RelayCommand FilterArchivesCommand
+        {
+            get { return filterArchivesCommand; }
+        }
+
+        public void FilterArchives()
+        {
+            filterCategory.Id = -10;
+            filterCategory.Name = "--Archívum--";
+            FilterNote();
+        }
+
         #endregion
 
         #region AddCategoryOperation

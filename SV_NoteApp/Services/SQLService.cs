@@ -41,7 +41,7 @@ namespace SV_NoteApp.Services
                     List<Note> NoteList = new List<Note>();
                     while (sqlReader.Read())
                     {
-                        NoteList.Add((new Note { Id = sqlReader.GetInt32(0), Title = sqlReader.GetString(1), Text = sqlReader.GetString(2), CategoryId = sqlReader.GetInt32(3), CreateDate = sqlReader.GetString(4), ModifyDate = sqlReader.GetString(5), IsPrio = sqlReader.GetBoolean(6) }));
+                        NoteList.Add((new Note { Id = sqlReader.GetInt32(0), Title = sqlReader.GetString(1), Text = sqlReader.GetString(2), CategoryId = sqlReader.GetInt32(3), CreateDate = sqlReader.GetString(4), ModifyDate = sqlReader.GetString(5), IsPrio = sqlReader.GetBoolean(6), IsArchived = sqlReader.GetBoolean(7) }));
                     }
                     theResult = NoteList;
                 }
@@ -133,7 +133,7 @@ namespace SV_NoteApp.Services
 
             switch (tbl)
             {
-                case "Notes": tblGenerateCommand= "CREATE TABLE \"Notes\" (\r\n\t\"Id\"\tINTEGER NOT NULL,\r\n\t\"Title\"\tTEXT NOT NULL,\r\n\t\"Text\"\tTEXT NOT NULL,\r\n\t\"CatId\"\tINTEGER NOT NULL DEFAULT -1,\r\n\t\"CreateDate\"\tDATE NOT NULL,\r\n\t\"ModifyDate\"\tDATE NOT NULL,\r\n\t\"isPrio\"\tBOOL NOT NULL DEFAULT 0,\r\n\tPRIMARY KEY(\"Id\" AUTOINCREMENT)\r\n);";
+                case "Notes": tblGenerateCommand= "CREATE TABLE \"Notes\" (\r\n\t\"Id\"\tINTEGER,\r\n\t\"Title\"\tTEXT NOT NULL,\r\n\t\"Text\"\tTEXT,\r\n\t\"CatId\"\tINTEGER,\r\n\t\"CreateDate\"\tDATE,\r\n\t\"ModifyDate\"\tDATE,\r\n\t\"isPrio\"\tBOOL DEFAULT 0,\r\n\t\"isArchived\"\tBOOL DEFAULT 0,\r\n\tPRIMARY KEY(\"Id\" AUTOINCREMENT)\r\n);";
                     break;
                 case "Categories": tblGenerateCommand= "CREATE TABLE \"Categories\" (\r\n\t\"Id\"\tINTEGER NOT NULL,\r\n\t\"Name\"\tVARCHAR(15) NOT NULL,\r\n\tPRIMARY KEY(\"Id\")\r\n);";
                     break;

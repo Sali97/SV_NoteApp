@@ -3,6 +3,7 @@ using SV_NoteApp.Utilities;
 using SV_NoteApp.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace SV_NoteApp.Services
 {
@@ -25,7 +26,7 @@ namespace SV_NoteApp.Services
         }
             public void getNotesFromSQL()
         {
-            theNoteList = theNoteSQLService.Query("SELECT Id,Title,Text,CatId,CreateDate,ModifyDate,isPrio FROM Notes") as List<Note>;
+            theNoteList = theNoteSQLService.Query("SELECT Id,Title,Text,CatId,CreateDate,ModifyDate,isPrio,isArchived FROM Notes") as List<Note>;
             refreshNoteItemList(filterId);
         }
 
@@ -41,7 +42,7 @@ namespace SV_NoteApp.Services
 
             foreach (Note item in theNoteList)
             {
-                if (item.CategoryId==categoryIndex) //A törölt kategóriában lévő elemek kategróia azonosítójának törlése
+                if (item.CategoryId==categoryIndex) //A törölt kategóriában lévő elemek kategória azonosítójának törlése
                 {
                     item.CategoryId = -10;
                 }
@@ -136,6 +137,7 @@ namespace SV_NoteApp.Services
             oldNote.CategoryId = UpdateNote.CategoryId;
             oldNote.ModifyDate = UpdateNote.ModifyDate;
             oldNote.IsPrio = UpdateNote.IsPrio;
+            oldNote.IsArchived = UpdateNote.IsArchived;
 
             refreshNoteItemList(filterId);
         }
@@ -147,24 +149,31 @@ namespace SV_NoteApp.Services
         }
 
 
-        public List<NoteItem> getNoteItems(int filterId)
+        public List<NoteItem> getNoteItems(int filterId) //Arcvhiált elemek CategoryIndexe = -10
         {
             NoteItemList.Clear();
             if (theNoteList != null) { 
             foreach (Note item in theNoteList)
-            {
-                if (filterId>0)
                 {
-                    if (item.CategoryId==filterId)
+                    if (filterId>0)
                     {
-                        NoteItemList.Add(getNoteItem(item));
+                        if (item.CategoryId==filterId & item.IsArchived==false)
+                        {
+                            NoteItemList.Add(getNoteItem(item));
+                        }
+                    }
+                    else
+                    {
+                        if (filterId==-10 & item.IsArchived==true)
+                        {
+                            NoteItemList.Add(getNoteItem(item));
+                        }
+                        if (item.IsArchived==false)
+                        {
+                            NoteItemList.Add(getNoteItem(item));
+                        }         
                     }
                 }
-                else
-                {
-                    NoteItemList.Add(getNoteItem(item));
-                }   
-            }
             }
 
             return NoteItemList;  
@@ -195,13 +204,13 @@ namespace SV_NoteApp.Services
 
         private void SQLAdd(Note NewNote)
         {
-            String commandtxt =String.Format ("INSERT INTO Notes VALUES({0},'{1}','{2}','{3}', '{4}', '{4}', {5})", NewNote.Id.ToString(), NewNote.Title, NewNote.Text, NewNote.CategoryId.ToString(), System.DateTime.Now, NewNote.IsPrio);
+            String commandtxt =String.Format ("INSERT INTO Notes VALUES({0},'{1}','{2}','{3}', '{4}', '{4}', {5}, {6})", NewNote.Id.ToString(), NewNote.Title, NewNote.Text, NewNote.CategoryId.ToString(), System.DateTime.Now, NewNote.IsPrio, NewNote.IsArchived);
             theNoteSQLService.Execute(commandtxt);
         }
 
         private void SQLUpdate(Note UpdatedNote)
         {
-            String commandtxt = String.Format("UPDATE Notes SET Title='{0}', Text='{1}', CatId={2}, ModifyDate='{3}', isPrio={4} WHERE Id={5}",UpdatedNote.Title,UpdatedNote.Text, UpdatedNote.CategoryId.ToString(), System.DateTime.Now, UpdatedNote.IsPrio,UpdatedNote.Id.ToString());
+            String commandtxt = String.Format("UPDATE Notes SET Title='{0}', Text='{1}', CatId={2}, ModifyDate='{3}', isPrio={4}, isArchived={5} WHERE Id={6}",UpdatedNote.Title,UpdatedNote.Text, UpdatedNote.CategoryId.ToString(), System.DateTime.Now, UpdatedNote.IsPrio, UpdatedNote.IsArchived,UpdatedNote.Id.ToString());
             theNoteSQLService.Execute(commandtxt);
         }
 

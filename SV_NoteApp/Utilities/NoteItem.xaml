@@ -48,6 +48,11 @@
                     <Image Stretch="UniformToFill" Source="{StaticResource prioIcon}"></Image>
                 </MenuItem.Icon>
             </MenuItem>
+            <MenuItem  Header="Archivált" Command="{Binding Path=ChangeArchiveNoteCommand}" IsCheckable="True" IsChecked="{Binding MyNote.IsArchived, Mode=OneWay}">
+                <MenuItem.Icon>
+                    <Image Stretch="UniformToFill" Source="{StaticResource archiveIcon}"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
     </UserControl.ContextMenu>
 </UserControl>   

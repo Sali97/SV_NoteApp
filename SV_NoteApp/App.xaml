@@ -9,6 +9,7 @@
         <BitmapImage x:Key="newIcon" UriSource="res/Image/newIcon.png"></BitmapImage>
         <BitmapImage x:Key="backIcon" UriSource="res/Image/backIcon.png"></BitmapImage>
         <BitmapImage x:Key="prioIcon" UriSource="res/Image/prioIcon.png"></BitmapImage>
+        <BitmapImage x:Key="archiveIcon" UriSource="res/Image/archiveIcon.png"></BitmapImage>
 
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
             <Setter Property="Template">
@@ -72,6 +73,34 @@
                         </Setter.Value>
                     </Setter>
                 </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ListView" x:Key="CategoryListStyle">
+            <Setter Property="Background" Value="#BCCCDC"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding FilterCategory.Id}" Value="-10">
+                    <Setter Property="Background" Value="Gray"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style TargetType="Border" x:Key="MainBorderStyle">
+            <Setter Property="Background" Value="#BCCCDC"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding FilterCategory.Id}" Value="-10">
+                    <Setter Property="Background" Value="Gray"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Grid" x:Key="GridSelectedNoteStlye">
+            <Setter Property="Background" Value="#BCCCDC"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedNote.IsArchived}" Value="True">
+                    <Setter Property="Background" Value="Gray"/>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
 

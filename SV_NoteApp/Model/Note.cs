@@ -70,6 +70,15 @@ namespace SV_NoteApp.Model
             set { isPrio = value; OnPropertyChanged("IsPrio"); }
         }
 
+        private bool isArchived;
+
+        public bool IsArchived
+        {
+            get { return isArchived; }
+            set { isArchived = value; OnPropertyChanged("IsArchived"); }
+        }
+
+
 
     }
 }
