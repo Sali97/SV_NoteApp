@@ -32,6 +32,8 @@ namespace SV_NoteApp.Utilities
             set { myNote = value; OnPropertyChanged("MyNote"); }
         }
 
+    
+
 
         public NoteItem(Note theNote, ViewModelBase theViewModel)
         {

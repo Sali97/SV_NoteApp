@@ -10,6 +10,16 @@
         <MouseBinding MouseAction="LeftClick" Command="{Binding Path=SelectCommand}"/>
     </UserControl.InputBindings>
 
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding MyNote.IsVisible}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
     <Border CornerRadius="10" Grid.RowSpan="4" Grid.ColumnSpan="2" Style="{StaticResource NoteItemBorderStyle}">
     <Grid>
         <Grid.RowDefinitions>

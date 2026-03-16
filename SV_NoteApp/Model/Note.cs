@@ -78,7 +78,17 @@ namespace SV_NoteApp.Model
             set { isArchived = value; OnPropertyChanged("IsArchived"); }
         }
 
+        private bool isVisible;
 
+        public bool IsVisible
+        {
+            get { return isVisible; }
+            set { isVisible = value; OnPropertyChanged("IsVisible"); }
+        }
 
+        public Note()
+        {
+            isVisible = true;
+        }
     }
 }
