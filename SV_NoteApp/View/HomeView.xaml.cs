@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using SV_NoteApp.ViewModel;
+using System.Windows.Controls;
 
 namespace SV_NoteApp.View
 {
@@ -7,9 +8,11 @@ namespace SV_NoteApp.View
     /// </summary>
     public partial class HomeView : UserControl
     {
-        public HomeView()
+        private ViewModelBase viewmodel;
+        public HomeView(ViewModelBase theViewModel)
         {
             InitializeComponent();
+            viewmodel = theViewModel;
         }
     }
 }

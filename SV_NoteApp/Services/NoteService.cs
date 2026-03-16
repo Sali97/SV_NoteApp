@@ -70,10 +70,33 @@ namespace SV_NoteApp.Services
             refreshNoteItemList(filterId);
         }
 
-        public void FilterNotes(int newFilter)
+        public void FilterNotesByCategory(int newFilter)
         {
             filterId = newFilter;
             refreshNoteItemList(filterId);
+        }
+
+        public void FilterNotesByText(String text)
+        {
+            foreach (Note item in theNoteList)
+            {
+                if (text.Length>3)
+                {
+                    if (item.Title.ToLower().Contains(text.ToLower())==false & item.Text.ToLower().Contains(text.ToLower())==false)
+                    {
+                        item.IsVisible = false;
+                    }
+                    else
+                    {
+                        item.IsVisible = true;
+                    }
+                }
+                else
+                {
+                    item.IsVisible = true;
+                }
+            }
+            FilterNotesByCategory(filterId);
         }
 
         private Note FindItem(int searchIndex)
@@ -181,6 +204,8 @@ namespace SV_NoteApp.Services
 
             return NoteItemList;  
         }
+
+
 
         public void refreshNoteItemList(int filterId)
         {

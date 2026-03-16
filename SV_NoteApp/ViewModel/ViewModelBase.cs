@@ -1,11 +1,14 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using SV_NoteApp.View;
-using SV_NoteApp.Utilities;
-using System.Windows.Input;
-using System.Collections.Generic;
-using SV_NoteApp.Model;
+﻿using SV_NoteApp.Model;
 using SV_NoteApp.Services;
+using SV_NoteApp.Utilities;
+using SV_NoteApp.View;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Security.Permissions;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace SV_NoteApp.ViewModel
 {
@@ -13,7 +16,7 @@ namespace SV_NoteApp.ViewModel
     {
         #region INotifyPropertyChanged_Implementation
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string propName=null)
+        public void OnPropertyChanged([CallerMemberName] string propName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
@@ -29,7 +32,7 @@ namespace SV_NoteApp.ViewModel
             set { categoryList = value; getNoteCategoryList(); }
         }
 
-        private int SelectedCategoryId =0;
+        private int SelectedCategoryId = 0;
 
 
         private List<NoteCategory> noteCategoryList;
@@ -47,7 +50,7 @@ namespace SV_NoteApp.ViewModel
                 NoteCategoryList.Add(item.MyNoteCategory);
             }
         }
-        
+
         private NoteCategory filterCategory;
         public NoteCategory FilterCategory
         {
@@ -91,22 +94,33 @@ namespace SV_NoteApp.ViewModel
             }
         }
 
+        private string searchText;
+
+        public string SearchText
+        {
+            get { return searchText; }
+            set { searchText = value; OnPropertyChanged("SearchText"); FilterNoteByString(); }
+        }
+
+
         public ViewModelBase()
         {
             theNoteService = new NoteService(this);
-            SelectedView = new HomeView();
+            SelectedView = new HomeView(this);
             UpdateViewCommand = new UpdateViewCommand(this);
             SelectedNote = new Note();
-            FilterCategory = new NoteCategory{ Id = -1, Name = "-"};
+            FilterCategory = new NoteCategory { Id = -1, Name = "-" };
+            SearchText = "";
             SelectedCategory = new NoteCategory();
 
-            
+
 
             #region NoteCommands
             addNoteCommand = new RelayCommand(AddNote);
             updateNoteCommand = new RelayCommand(UpdateNote);
             deleteNoteCommand = new RelayCommand(DeleteNote);
             filterNoteCommand = new RelayCommand(FilterNote);
+            filterNoteByStringCommand = new RelayCommand(FilterNoteByString);
             filterArchivesCommand = new RelayCommand(FilterArchives);
 
             #endregion
@@ -117,7 +131,7 @@ namespace SV_NoteApp.ViewModel
             NoteCategoryList = new List<NoteCategory> { };
 
             NoteList = new List<NoteItem>
-            {  };
+            { };
 
             theNoteService.getNotesFromSQL();
             NoteList = theNoteService.NoteItemList;
@@ -154,17 +168,17 @@ namespace SV_NoteApp.ViewModel
             theNote.ModifyDate = System.DateTime.Now.ToString();
 
 
-          
-                if (theNoteService.HasThis(theNote.Id))
-                {
-                    UpdateNote();
-                }
-                else
-                {
-                    theNoteService.Add(theNote);
-                }
-            
-           
+
+            if (theNoteService.HasThis(theNote.Id))
+            {
+                UpdateNote();
+            }
+            else
+            {
+                theNoteService.Add(theNote);
+            }
+
+
 
             UpdateViewCommand.Execute("HomeView");
             RefreshView();
@@ -225,11 +239,25 @@ namespace SV_NoteApp.ViewModel
         }
         public void FilterNote()
         {
-            theNoteService.FilterNotes(FilterCategory.Id);
+            theNoteService.FilterNotesByCategory(FilterCategory.Id);
             RefreshView();
         }
         #endregion
-
+        #region FilterNoteByStringOperation
+        private RelayCommand filterNoteByStringCommand;
+        public RelayCommand FilterNoteByStringCommand
+        {
+            get { return filterNoteByStringCommand; }
+        }
+        public void FilterNoteByString()
+        {
+            if (NoteList!=null)
+            {
+                theNoteService.FilterNotesByText(SearchText);
+                RefreshView();
+            } 
+        }
+        #endregion
         #region FilterArchivesOperation
         private RelayCommand filterArchivesCommand;
 
@@ -256,7 +284,7 @@ namespace SV_NoteApp.ViewModel
         public void AddCategory()
         {
             var dialog = new ModifyCategoryDialog(new NoteCategory());
-            if (dialog.ShowDialog()==true)
+            if (dialog.ShowDialog() == true)
             {
                 theNoteService.AddCategory(new NoteCategory { Name = dialog.ResponseText });
             }
@@ -278,7 +306,7 @@ namespace SV_NoteApp.ViewModel
                 {
                     theNoteCategory.Name = dialog.ResponseText;
                     theNoteService.UpdateCategory(theNoteCategory);
-                    if (FilterCategory.Id==theNoteCategory.Id && FilterCategory.Name!=theNoteCategory.Name)
+                    if (FilterCategory.Id == theNoteCategory.Id && FilterCategory.Name != theNoteCategory.Name)
                     {
                         FilterCategory.Name = theNoteCategory.Name;
                     }
@@ -306,5 +334,6 @@ namespace SV_NoteApp.ViewModel
 
             UpdateViewCommand.Execute("HomeView");
         }
+
     }
 }

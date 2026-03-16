@@ -26,7 +26,7 @@ namespace SV_NoteApp.Utilities
         {
             if (parameter.ToString() == "HomeView")
             {
-                viewModel.SelectedView = new HomeView();
+                viewModel.SelectedView = new HomeView(viewModel);
             }
             if (parameter.ToString() == "SelectedView")
             {
