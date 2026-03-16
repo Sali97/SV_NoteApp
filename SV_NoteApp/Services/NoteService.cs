@@ -44,7 +44,7 @@ namespace SV_NoteApp.Services
             {
                 if (item.CategoryId==categoryIndex) //A törölt kategóriában lévő elemek kategória azonosítójának törlése
                 {
-                    item.CategoryId = -10;
+                    item.CategoryId = -100;
                 }
             }
 
@@ -155,23 +155,26 @@ namespace SV_NoteApp.Services
             if (theNoteList != null) { 
             foreach (Note item in theNoteList)
                 {
-                    if (filterId>0)
+                    switch (filterId)
                     {
-                        if (item.CategoryId==filterId & item.IsArchived==false)
-                        {
-                            NoteItemList.Add(getNoteItem(item));
-                        }
-                    }
-                    else
-                    {
-                        if (filterId==-10 & item.IsArchived==true)
-                        {
-                            NoteItemList.Add(getNoteItem(item));
-                        }
-                        if (item.IsArchived==false)
-                        {
-                            NoteItemList.Add(getNoteItem(item));
-                        }         
+                        case -1:
+                            if (item.IsArchived == false)
+                            {
+                                NoteItemList.Add(getNoteItem(item));
+                            }
+                            break;
+                        case -10:
+                            if (item.IsArchived == true)
+                            {
+                                NoteItemList.Add(getNoteItem(item));
+                            }
+                            break;
+                        default:
+                            if (item.CategoryId == filterId & item.IsArchived == false)
+                            {
+                                NoteItemList.Add(getNoteItem(item));
+                            }
+                            break;
                     }
                 }
             }

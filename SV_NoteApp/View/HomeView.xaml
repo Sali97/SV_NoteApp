@@ -69,6 +69,11 @@
             </ScrollViewer.ContextMenu>
         </ScrollViewer>
 
-        <Button Grid.Column="0" Grid.Row="2" Content="Teszt button" Margin="2" Command="{Binding FilterArchivesCommand}"></Button>
+        <Button Grid.Column="0" Grid.Row="2" Margin="8" Command="{Binding FilterArchivesCommand}" Cursor="Hand">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/res/Image/archiveIcon.png" Height="18" Width="18" Margin="4"/>
+                <TextBlock Margin="0,5" FontSize="16">Archívum</TextBlock>
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>
